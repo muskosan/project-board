@@ -28,6 +28,7 @@ const LeftPanelContent = styled.div`
   flex-direction: column;
   gap: ${tokens.spacing.lg};
   height: 100%;
+  min-height: 0; /* Allow flex children to shrink */
 `;
 
 const RightPanelContent = styled.div`
@@ -35,6 +36,7 @@ const RightPanelContent = styled.div`
   flex-direction: column;
   gap: ${tokens.spacing.lg};
   height: 100%;
+  min-height: 0; /* Allow flex children to shrink */
 `;
 
 // Transform tasks and projects into deadline items

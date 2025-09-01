@@ -77,16 +77,32 @@ const buttonSizes = {
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
     font-size: ${({ theme }) => theme.typography.sizes.sm};
     height: 32px;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      height: ${({ theme }) => theme.touch.minTarget};
+      min-width: ${({ theme }) => theme.touch.minTarget};
+    }
   `,
   md: css`
     padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
     font-size: ${({ theme }) => theme.typography.sizes.base};
     height: 40px;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      height: ${({ theme }) => theme.touch.minTarget};
+      min-width: ${({ theme }) => theme.touch.minTarget};
+      padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
+    }
   `,
   lg: css`
     padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
     font-size: ${({ theme }) => theme.typography.sizes.lg};
     height: 48px;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      height: 52px;
+      padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
+    }
   `,
 };
 

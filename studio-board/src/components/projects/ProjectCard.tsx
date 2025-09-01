@@ -22,6 +22,12 @@ const CardContainer = styled(Card)<{ variant: 'grid' | 'list' }>`
     align-items: center;
     padding: ${({ theme }) => theme.spacing.md};
     margin-bottom: ${({ theme }) => theme.spacing.sm};
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      flex-direction: column;
+      align-items: stretch;
+      padding: ${({ theme }) => theme.spacing.sm};
+    }
   `}
   
   ${({ variant }) => variant === 'grid' && css`
@@ -29,7 +35,20 @@ const CardContainer = styled(Card)<{ variant: 'grid' | 'list' }>`
     flex-direction: column;
     height: 100%;
     min-height: 280px;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      min-height: 240px;
+    }
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      min-height: 200px;
+    }
   `}
+  
+  /* Touch-friendly minimum size */
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    min-height: ${({ theme }) => theme.touch.minTarget};
+  }
 `;
 
 const ProjectHeader = styled.div<{ variant: 'grid' | 'list' }>`
@@ -42,7 +61,16 @@ const ProjectHeader = styled.div<{ variant: 'grid' | 'list' }>`
     flex: 1;
     margin-bottom: 0;
     margin-right: ${({ theme }) => theme.spacing.lg};
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      margin-right: 0;
+      margin-bottom: ${({ theme }) => theme.spacing.sm};
+    }
   `}
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    margin-bottom: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const ProjectInfo = styled.div`

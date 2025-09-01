@@ -35,6 +35,10 @@ const Header = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const Title = styled.h1`
@@ -91,6 +95,11 @@ const FiltersSection = styled.div`
   background-color: ${({ theme }) => theme.colors.background.elevated};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   box-shadow: ${({ theme }) => theme.shadows.sm};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const FilterRow = styled.div`
@@ -105,6 +114,11 @@ const FilterGroup = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
   min-width: 200px;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    min-width: auto;
+    width: 100%;
+  }
 `;
 
 const FilterLabel = styled.label`
@@ -178,7 +192,13 @@ const ProjectGrid = styled.div<{ variant: 'grid' | 'list' }>`
     gap: ${({ theme }) => theme.spacing.lg};
     
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: ${({ theme }) => theme.spacing.md};
+    }
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
       grid-template-columns: 1fr;
+      gap: ${({ theme }) => theme.spacing.sm};
     }
   `}
   
@@ -186,6 +206,10 @@ const ProjectGrid = styled.div<{ variant: 'grid' | 'list' }>`
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.sm};
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+      gap: ${({ theme }) => theme.spacing.xs};
+    }
   `}
 `;
 

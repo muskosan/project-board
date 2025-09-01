@@ -48,6 +48,27 @@ const CardContainer = styled(motion.div)<{
     border-color: ${({ theme }) => theme.colors.accent.primary};
     transform: translateY(-2px);
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 0.75rem;
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    
+    /* Touch-friendly minimum size */
+    min-height: ${({ theme }) => theme.touch.minTarget};
+    
+    /* Reduce hover effects on touch devices */
+    @media (hover: none) {
+      &:hover {
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.5rem;
+    border-left-width: 2px;
+  }
 
   &:active {
     cursor: grabbing;

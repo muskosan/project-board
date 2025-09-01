@@ -71,6 +71,10 @@ export const tokens = {
     desktop: '1024px',
     wide: '1280px',
   },
+  touch: {
+    minTarget: '44px', // Minimum touch target size
+    spacing: '12px', // Minimum spacing between touch targets
+  },
   transitions: {
     fast: '150ms cubic-bezier(0.4, 0, 0.2, 1)',
     normal: '300ms cubic-bezier(0.4, 0, 0.2, 1)',

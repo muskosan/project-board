@@ -10,6 +10,9 @@ export * from './apiClient';
 // Export client access utilities
 export * from './clientAccess';
 
+// Export responsive utilities
+export * from './responsive';
+
 // Re-export specific types to avoid conflicts
 export type {
   User,

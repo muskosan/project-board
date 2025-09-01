@@ -26,6 +26,16 @@ const ColumnContainer = styled.div<{ $isDraggedOver: boolean }>`
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 280px;
+    min-height: 400px;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    width: 260px;
+    min-height: 350px;
+  }
 `;
 
 const ColumnHeader = styled.div`
@@ -34,6 +44,14 @@ const ColumnHeader = styled.div`
   justify-content: space-between;
   padding: 1.5rem 1.5rem 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.background.secondary};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 1rem 1rem 0.75rem;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.75rem 0.75rem 0.5rem;
+  }
 `;
 
 const ColumnTitle = styled.div`
@@ -81,6 +99,27 @@ const ColumnContent = styled.div`
   gap: 1rem;
   overflow-y: auto;
   min-height: 200px;
+  
+  /* Touch scrolling optimization */
+  -webkit-overflow-scrolling: touch;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+    min-height: 150px;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+    min-height: 120px;
+    
+    /* Hide scrollbar on mobile */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 `;
 
 const TaskList = styled.div`

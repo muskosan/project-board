@@ -5,20 +5,25 @@ import { tokens } from '../../styles/tokens';
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 400px;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr auto;
   gap: ${tokens.spacing.xl};
   height: calc(100vh - 120px); /* Account for header and padding */
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
+    gap: ${tokens.spacing.lg};
     height: auto;
+  }
+  
+  @media (max-width: ${tokens.breakpoints.mobile}) {
+    gap: ${tokens.spacing.md};
   }
 `;
 
 const LeftPanel = styled.div`
   grid-column: 1;
-  grid-row: 1 / -1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.lg};
@@ -32,7 +37,7 @@ const LeftPanel = styled.div`
 
 const RightPanel = styled.div`
   grid-column: 2;
-  grid-row: 1 / -1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.lg};
@@ -46,7 +51,7 @@ const RightPanel = styled.div`
 
 const ActivitySection = styled.div`
   grid-column: 1 / -1;
-  grid-row: 1;
+  grid-row: 2;
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
     grid-column: 1;

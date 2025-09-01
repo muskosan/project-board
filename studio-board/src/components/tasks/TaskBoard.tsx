@@ -33,12 +33,41 @@ const BoardContainer = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   min-height: 600px;
+  
+  /* Touch scrolling optimization */
+  -webkit-overflow-scrolling: touch;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 1rem;
+    padding: 1rem;
+    min-height: 500px;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    gap: 0.75rem;
+    padding: 0.75rem;
+    min-height: 400px;
+    
+    /* Hide scrollbar on mobile */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 `;
 
 const BoardContent = styled.div`
   display: flex;
   gap: 1.5rem;
   min-width: fit-content;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 1rem;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    gap: 0.75rem;
+  }
 `;
 
 // ============================================================================

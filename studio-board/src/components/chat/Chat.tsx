@@ -24,6 +24,11 @@ const ChatContainer = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.sm};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: column;
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+  }
 `;
 
 const ThreadSidebar = styled.div`
@@ -32,6 +37,17 @@ const ThreadSidebar = styled.div`
   border-right: 1px solid ${({ theme }) => theme.colors.background.primary};
   display: flex;
   flex-direction: column;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100%;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.background.primary};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    max-height: 150px;
+  }
 `;
 
 const ChatMain = styled.div`
@@ -45,6 +61,14 @@ const ChatHeader = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   border-bottom: 1px solid ${({ theme }) => theme.colors.background.primary};
   background-color: ${({ theme }) => theme.colors.background.elevated};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.md};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: ${({ theme }) => theme.spacing.sm};
+  }
 `;
 
 const ThreadTitle = styled.h3`

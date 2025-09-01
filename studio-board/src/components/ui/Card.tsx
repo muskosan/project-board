@@ -55,7 +55,21 @@ const StyledCard = styled(motion.div)<CardProps>`
   ${({ clickable }) => clickable && css`
     cursor: pointer;
     user-select: none;
+    
+    /* Touch-friendly minimum size */
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+      min-height: ${({ theme }) => theme.touch.minTarget};
+    }
   `}
+  
+  /* Mobile-specific styling */
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    border-radius: ${({ theme }) => theme.borderRadius.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+  }
 `;
 
 export const Card: React.FC<CardProps> = ({ 

@@ -8,6 +8,17 @@ import { Badge } from '../ui/Badge';
 
 const ProjectsContainer = styled(Card)`
   padding: ${tokens.spacing.xl};
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    padding: ${tokens.spacing.lg};
+  }
+  
+  @media (max-width: ${tokens.breakpoints.mobile}) {
+    padding: ${tokens.spacing.md};
+  }
 `;
 
 const ProjectsHeader = styled.div`
@@ -39,6 +50,30 @@ const ProjectsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.md};
+  flex: 1;
+  overflow-y: auto;
+  
+  /* Custom scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: ${tokens.colors.text.muted};
+    border-radius: 2px;
+  }
+  
+  @media (max-width: ${tokens.breakpoints.mobile}) {
+    /* Hide scrollbar on mobile */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 `;
 
 const ProjectCard = styled.div`

@@ -11,6 +11,9 @@ const FeedContainer = styled(Card)`
   padding: ${tokens.spacing.xl};
   max-height: 400px;
   overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   
   /* Custom scrollbar styling */
   &::-webkit-scrollbar {
@@ -29,6 +32,22 @@ const FeedContainer = styled(Card)`
       background: ${tokens.colors.text.secondary};
     }
   }
+  
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    padding: ${tokens.spacing.lg};
+    max-height: 300px;
+  }
+  
+  @media (max-width: ${tokens.breakpoints.mobile}) {
+    padding: ${tokens.spacing.md};
+    max-height: 250px;
+    
+    /* Hide scrollbar on mobile */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 `;
 
 const FeedHeader = styled.div`
@@ -44,6 +63,8 @@ const FeedList = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.md};
+  flex: 1;
+  overflow-y: auto;
 `;
 
 const ActivityItemContainer = styled(motion.div)`

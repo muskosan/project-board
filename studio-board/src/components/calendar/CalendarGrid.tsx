@@ -16,6 +16,14 @@ const GridContainer = styled.div`
   flex-direction: column;
   height: 100%;
   min-height: 600px;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    min-height: 500px;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    min-height: 400px;
+  }
 `;
 
 const WeekHeader = styled.div`
@@ -33,6 +41,25 @@ const WeekHeaderCell = styled.div`
   color: ${({ theme }) => theme.colors.text.secondary};
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.sm};
+    font-size: ${({ theme }) => theme.typography.sizes.xs};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: ${({ theme }) => theme.spacing.xs};
+    font-size: ${({ theme }) => theme.typography.sizes.xs};
+    
+    /* Show abbreviated day names on mobile */
+    &::first-letter {
+      display: inline;
+    }
+    
+    span:not(:first-child) {
+      display: none;
+    }
+  }
 `;
 
 const MonthGrid = styled.div`

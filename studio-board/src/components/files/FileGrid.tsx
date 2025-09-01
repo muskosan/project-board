@@ -32,6 +32,27 @@ const GridContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.md};
   flex: 1;
   overflow-y: auto;
+  
+  /* Touch scrolling optimization */
+  -webkit-overflow-scrolling: touch;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: ${({ theme }) => theme.spacing.sm};
+    padding: ${({ theme }) => theme.spacing.sm};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: ${({ theme }) => theme.spacing.xs};
+    padding: ${({ theme }) => theme.spacing.xs};
+    
+    /* Hide scrollbar on mobile */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
 `;
 
 const EmptyState = styled.div`

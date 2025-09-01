@@ -18,12 +18,20 @@ const HeaderContainer = styled.div`
   background-color: ${tokens.colors.background.elevated};
   border-bottom: 1px solid ${tokens.colors.background.secondary};
   backdrop-filter: blur(8px);
+  
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    height: 56px;
+  }
 `;
 
 const ContentWrapper = styled.div`
   display: flex;
   width: 100%;
   padding-top: 64px; /* Account for fixed header */
+  
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    padding-top: 56px;
+  }
 `;
 
 const MainContent = styled.main`
@@ -55,11 +63,21 @@ const MainContent = styled.main`
 
   @media (max-width: ${tokens.breakpoints.tablet}) {
     padding: ${tokens.spacing.lg};
+    min-height: calc(100vh - 56px);
   }
 
   @media (max-width: ${tokens.breakpoints.mobile}) {
     padding: ${tokens.spacing.md};
+    
+    /* Hide scrollbar on mobile for cleaner look */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
   }
+  
+  /* Touch scrolling optimization */
+  -webkit-overflow-scrolling: touch;
 `;
 
 interface AppShellProps {
