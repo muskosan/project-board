@@ -265,6 +265,11 @@ export const UpcomingDeadlines: React.FC<UpcomingDeadlinesProps> = ({
               </DateColumn>
               
               <DeadlineContent>
+              {deadline.project && (
+                    <ProjectBadge color={deadline.project.color}>
+                      {deadline.project.name}
+                    </ProjectBadge>
+                  )}
                 <DeadlineTitle variant="body">
                   {deadline.title}
                 </DeadlineTitle>
@@ -276,11 +281,6 @@ export const UpcomingDeadlines: React.FC<UpcomingDeadlinesProps> = ({
                   >
                     {getUrgencyText(deadline.dueDate)}
                   </Typography>
-                  {deadline.project && (
-                    <ProjectBadge color={deadline.project.color}>
-                      {deadline.project.name}
-                    </ProjectBadge>
-                  )}
                 </DeadlineMeta>
               </DeadlineContent>
             </DeadlineItem>
