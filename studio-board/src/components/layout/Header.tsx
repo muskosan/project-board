@@ -9,26 +9,28 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 ${tokens.spacing.xl};
+  padding: 0 ${tokens.spacing[6]};
   background-color: ${tokens.colors.background.elevated};
+  border-bottom: 1px solid ${tokens.colors.border.light};
+  box-shadow: ${tokens.shadows.sm};
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
-    padding: 0 ${tokens.spacing.lg};
+    padding: 0 ${tokens.spacing[4]};
     height: 56px;
   }
   
   @media (max-width: ${tokens.breakpoints.mobile}) {
-    padding: 0 ${tokens.spacing.md};
+    padding: 0 ${tokens.spacing[4]};
   }
 `;
 
 const LeftSection = styled.div`
   display: flex;
   align-items: center;
-  gap: ${tokens.spacing.lg};
+  gap: ${tokens.spacing[6]};
   
   @media (max-width: ${tokens.breakpoints.mobile}) {
-    gap: ${tokens.spacing.md};
+    gap: ${tokens.spacing[4]};
   }
 `;
 
@@ -43,15 +45,21 @@ const MobileMenuButton = styled.button`
   color: ${tokens.colors.text.secondary};
   border-radius: ${tokens.borderRadius.md};
   cursor: pointer;
-  transition: all ${tokens.transitions.fast};
+  transition: ${tokens.transitions.colors};
   
   &:hover {
-    background-color: ${tokens.colors.background.secondary};
+    background-color: ${tokens.colors.interactive.secondaryHover};
     color: ${tokens.colors.text.primary};
   }
   
   &:active {
+    background-color: ${tokens.colors.interactive.secondaryActive};
     transform: scale(0.95);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: ${tokens.shadows.focus};
   }
   
   svg {
@@ -83,17 +91,17 @@ const Logo = styled.h1`
 const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: ${tokens.spacing.md};
+  gap: ${tokens.spacing[3]};
   
   @media (max-width: ${tokens.breakpoints.mobile}) {
-    gap: ${tokens.spacing.sm};
+    gap: ${tokens.spacing[2]};
   }
 `;
 
 const MobileActions = styled.div`
   display: none;
   align-items: center;
-  gap: ${tokens.spacing.sm};
+  gap: ${tokens.spacing[1]};
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
     display: flex;
@@ -111,15 +119,21 @@ const ActionButton = styled.button`
   color: ${tokens.colors.text.secondary};
   border-radius: ${tokens.borderRadius.md};
   cursor: pointer;
-  transition: all ${tokens.transitions.fast};
+  transition: ${tokens.transitions.colors};
   
   &:hover {
-    background-color: ${tokens.colors.background.secondary};
+    background-color: ${tokens.colors.interactive.secondaryHover};
     color: ${tokens.colors.text.primary};
   }
   
   &:active {
+    background-color: ${tokens.colors.interactive.secondaryActive};
     transform: scale(0.95);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: ${tokens.shadows.focus};
   }
   
   svg {
@@ -131,14 +145,23 @@ const ActionButton = styled.button`
 const UserSection = styled.div`
   display: flex;
   align-items: center;
-  gap: ${tokens.spacing.sm};
-  padding: ${tokens.spacing.sm} ${tokens.spacing.md};
+  gap: ${tokens.spacing[3]};
+  padding: ${tokens.spacing[2]} ${tokens.spacing[3]};
   border-radius: ${tokens.borderRadius.lg};
-  transition: background-color ${tokens.transitions.fast};
+  transition: ${tokens.transitions.colors};
   cursor: pointer;
 
   &:hover {
-    background-color: ${tokens.colors.background.secondary};
+    background-color: ${tokens.colors.interactive.secondaryHover};
+  }
+  
+  &:active {
+    background-color: ${tokens.colors.interactive.secondaryActive};
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: ${tokens.shadows.focus};
   }
 `;
 

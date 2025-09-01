@@ -1,32 +1,32 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-import { cardHoverVariants, transitions } from '../../utils/animations';
+import { tokens } from '../../styles/tokens';
 
 interface CardProps {
+  children: React.ReactNode;
   variant?: 'default' | 'elevated' | 'outlined';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   hover?: boolean;
   clickable?: boolean;
-  children: React.ReactNode;
-  onClick?: (event?: React.MouseEvent) => void;
   className?: string;
+  onClick?: () => void;
 }
 
 const cardVariants = {
   default: css`
-    background-color: ${({ theme }) => theme.colors.background.elevated};
-    border: 1px solid transparent;
-    box-shadow: ${({ theme }) => theme.shadows.sm};
+    background-color: ${tokens.colors.background.elevated};
+    border: 1px solid ${tokens.colors.border.light};
+    box-shadow: ${tokens.shadows.sm};
   `,
   elevated: css`
-    background-color: ${({ theme }) => theme.colors.background.elevated};
-    border: 1px solid transparent;
-    box-shadow: ${({ theme }) => theme.shadows.lg};
+    background-color: ${tokens.colors.background.elevated};
+    border: 1px solid ${tokens.colors.border.light};
+    box-shadow: ${tokens.shadows.md};
   `,
   outlined: css`
-    background-color: ${({ theme }) => theme.colors.background.elevated};
-    border: 1px solid ${({ theme }) => theme.colors.text.muted};
+    background-color: ${tokens.colors.background.primary};
+    border: 1px solid ${tokens.colors.border.medium};
     box-shadow: none;
   `,
 };
@@ -36,59 +36,60 @@ const cardPadding = {
     padding: 0;
   `,
   sm: css`
-    padding: ${({ theme }) => theme.spacing.md};
+    padding: ${tokens.spacing[3]};
   `,
   md: css`
-    padding: ${({ theme }) => theme.spacing.lg};
+    padding: ${tokens.spacing[4]};
   `,
   lg: css`
-    padding: ${({ theme }) => theme.spacing.xl};
+    padding: ${tokens.spacing[6]};
   `,
 };
 
 const StyledCard = styled(motion.div)<CardProps>`
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  border-radius: ${tokens.borderRadius.xl};
+  transition: ${tokens.transitions.all};
+  position: relative;
+  overflow: hidden;
   
   ${({ variant = 'default' }) => cardVariants[variant]}
   ${({ padding = 'md' }) => cardPadding[padding]}
   
-  ${({ clickable }) => clickable && css`
-    cursor: pointer;
-    user-select: none;
-    
-    /* Touch-friendly minimum size */
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-      min-height: ${({ theme }) => theme.touch.minTarget};
+  ${({ hover }) => hover && css`
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: ${tokens.shadows.lg};
+      border-color: ${tokens.colors.border.medium};
     }
   `}
   
-  /* Mobile-specific styling */
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    border-radius: ${({ theme }) => theme.borderRadius.md};
-  }
+  ${({ clickable }) => clickable && css`
+    cursor: pointer;
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    &:focus-visible {
+      outline: none;
+      box-shadow: ${tokens.shadows.focus};
+    }
+  `}
 `;
 
 export const Card: React.FC<CardProps> = ({ 
   children, 
-  onClick,
-  clickable,
-  hover = clickable,
+  hover = false,
+  clickable = false,
   ...props 
 }) => {
-  const isInteractive = clickable || !!onClick;
-  
   return (
-    <StyledCard 
-      onClick={onClick} 
-      clickable={isInteractive}
-      variants={cardHoverVariants}
-      initial="initial"
-      whileHover={hover && isInteractive ? "hover" : undefined}
-      whileTap={isInteractive ? { scale: 0.98, transition: transitions.micro } : undefined}
+    <StyledCard
+      hover={hover}
+      clickable={clickable}
+      whileHover={hover ? { y: -2 } : undefined}
+      whileTap={clickable ? { scale: 0.98 } : undefined}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
       {...props}
     >
       {children}
@@ -96,50 +97,19 @@ export const Card: React.FC<CardProps> = ({
   );
 };
 
-// Card sub-components for better composition
-interface CardHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const StyledCardHeader = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
+// Legacy exports for backward compatibility
+export const CardHeader = styled.div`
+  padding: ${tokens.spacing[4]} ${tokens.spacing[4]} 0;
 `;
 
-export const CardHeader: React.FC<CardHeaderProps> = ({ children, ...props }) => {
-  return <StyledCardHeader {...props}>{children}</StyledCardHeader>;
-};
-
-interface CardContentProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const StyledCardContent = styled.div`
-  flex: 1;
+export const CardContent = styled.div`
+  padding: ${tokens.spacing[4]};
 `;
 
-export const CardContent: React.FC<CardContentProps> = ({ children, ...props }) => {
-  return <StyledCardContent {...props}>{children}</StyledCardContent>;
-};
-
-interface CardFooterProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const StyledCardFooter = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.md};
-  
-  &:first-child {
-    margin-top: 0;
-  }
+export const CardFooter = styled.div`
+  padding: 0 ${tokens.spacing[4]} ${tokens.spacing[4]};
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: ${tokens.spacing[2]};
 `;
-
-export const CardFooter: React.FC<CardFooterProps> = ({ children, ...props }) => {
-  return <StyledCardFooter {...props}>{children}</StyledCardFooter>;
-};

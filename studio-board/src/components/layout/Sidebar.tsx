@@ -23,7 +23,7 @@ const SidebarContainer = styled.aside<{ $isExpanded: boolean; $isMobile: boolean
     return $isExpanded ? '240px' : '64px';
   }};
   background-color: ${tokens.colors.background.elevated};
-  border-right: 1px solid ${tokens.colors.background.secondary};
+  border-right: 1px solid ${tokens.colors.border.light};
   transition: all ${tokens.transitions.normal};
   display: flex;
   flex-direction: column;
@@ -62,24 +62,30 @@ const Overlay = styled.div<{ $isVisible: boolean }>`
 
 const ToggleButton = styled.button<{ $isMobile: boolean }>`
   position: ${({ $isMobile }) => ($isMobile ? 'fixed' : 'absolute')};
-  top: ${({ $isMobile }) => ($isMobile ? '20px' : tokens.spacing.lg)};
+  top: ${({ $isMobile }) => ($isMobile ? '20px' : tokens.spacing[6])};
   ${({ $isMobile }) => ($isMobile ? 'left: 20px;' : 'right: -12px;')}
   width: 24px;
   height: 24px;
   background-color: ${tokens.colors.background.elevated};
-  border: 1px solid ${tokens.colors.background.secondary};
-  border-radius: 50%;
+  border: 1px solid ${tokens.colors.border.light};
+  border-radius: ${tokens.borderRadius.full};
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${tokens.colors.text.secondary};
-  transition: all ${tokens.transitions.fast};
+  transition: ${tokens.transitions.all};
   z-index: 101;
   cursor: pointer;
 
   &:hover {
-    background-color: ${tokens.colors.background.secondary};
+    background-color: ${tokens.colors.interactive.secondaryHover};
+    border-color: ${tokens.colors.border.medium};
     transform: scale(1.1);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: ${tokens.shadows.focus};
   }
 
   @media (max-width: ${tokens.breakpoints.tablet}) {
@@ -92,7 +98,7 @@ const ToggleButton = styled.button<{ $isMobile: boolean }>`
 `;
 
 const Navigation = styled.nav<{ $isExpanded: boolean }>`
-  padding: ${tokens.spacing.xl} 0 ${tokens.spacing.lg} 0;
+  padding: ${tokens.spacing[8]} 0 ${tokens.spacing[6]} 0;
   flex: 1;
   overflow-y: auto;
   
@@ -106,33 +112,35 @@ const Navigation = styled.nav<{ $isExpanded: boolean }>`
   }
   
   &::-webkit-scrollbar-thumb {
-    background: ${tokens.colors.text.muted};
-    border-radius: 2px;
+    background: ${tokens.colors.surface[300]};
+    border-radius: ${tokens.borderRadius.sm};
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${tokens.colors.surface[400]};
   }
 `;
 
 const NavItem = styled(NavLink)<{ $isExpanded: boolean }>`
   display: flex;
   align-items: center;
-  padding: ${tokens.spacing.md} ${tokens.spacing.lg};
+  padding: ${tokens.spacing[3]} ${tokens.spacing[4]};
   color: ${tokens.colors.text.secondary};
-  transition: all ${tokens.transitions.fast};
+  transition: ${tokens.transitions.colors};
   position: relative;
   text-decoration: none;
-  border-radius: 0;
-  margin: 0 ${tokens.spacing.sm};
   border-radius: ${tokens.borderRadius.md};
+  margin: 0 ${tokens.spacing[2]};
 
   &:hover {
-    background-color: ${tokens.colors.background.secondary};
+    background-color: ${tokens.colors.interactive.secondaryHover};
     color: ${tokens.colors.text.primary};
-    transform: translateX(2px);
   }
 
   &.active {
-    background-color: ${tokens.colors.accent.primary}15;
-    color: ${tokens.colors.accent.primary};
-    font-weight: ${tokens.typography.weights.medium};
+    background-color: ${tokens.colors.interactive.primary}10;
+    color: ${tokens.colors.interactive.primary};
+    font-weight: ${tokens.typography.weights.semibold};
     
     &::before {
       content: '';
@@ -142,18 +150,23 @@ const NavItem = styled(NavLink)<{ $isExpanded: boolean }>`
       transform: translateY(-50%);
       width: 3px;
       height: 20px;
-      background-color: ${tokens.colors.accent.primary};
-      border-radius: 0 2px 2px 0;
+      background-color: ${tokens.colors.interactive.primary};
+      border-radius: 0 ${tokens.borderRadius.sm} ${tokens.borderRadius.sm} 0;
     }
+  }
+  
+  &:focus-visible {
+    outline: none;
+    box-shadow: ${tokens.shadows.focus};
   }
 
   svg {
     width: 20px;
     height: 20px;
     margin-right: ${({ $isExpanded }) =>
-      $isExpanded ? tokens.spacing.md : '0'};
+      $isExpanded ? tokens.spacing[3] : '0'};
     flex-shrink: 0;
-    transition: transform ${tokens.transitions.fast};
+    transition: ${tokens.transitions.transform};
   }
 
   span {
@@ -176,34 +189,34 @@ const NavItem = styled(NavLink)<{ $isExpanded: boolean }>`
         left: 100%;
         top: 50%;
         transform: translateY(-50%);
-        background-color: ${tokens.colors.text.primary};
-        color: ${tokens.colors.background.elevated};
-        padding: ${tokens.spacing.sm} ${tokens.spacing.md};
+        background-color: ${tokens.colors.surface[800]};
+        color: ${tokens.colors.text.inverse};
+        padding: ${tokens.spacing[2]} ${tokens.spacing[3]};
         border-radius: ${tokens.borderRadius.md};
         font-size: ${tokens.typography.sizes.xs};
         white-space: nowrap;
         z-index: 1000;
-        margin-left: ${tokens.spacing.sm};
-        box-shadow: ${tokens.shadows.md};
+        margin-left: ${tokens.spacing[2]};
+        box-shadow: ${tokens.shadows.lg};
       }
     }
   `}
 `;
 
 const NavSection = styled.div`
-  margin-bottom: ${tokens.spacing.lg};
+  margin-bottom: ${tokens.spacing[6]};
 `;
 
 const SectionTitle = styled.div<{ $isExpanded: boolean }>`
-  padding: ${tokens.spacing.sm} ${tokens.spacing.lg};
+  padding: ${tokens.spacing[2]} ${tokens.spacing[4]};
   font-size: ${tokens.typography.sizes.xs};
   font-weight: ${tokens.typography.weights.semibold};
   color: ${tokens.colors.text.muted};
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: ${tokens.typography.letterSpacing.wide};
   opacity: ${({ $isExpanded }) => ($isExpanded ? 1 : 0)};
-  transition: opacity ${tokens.transitions.normal};
-  margin-bottom: ${tokens.spacing.sm};
+  transition: ${tokens.transitions.opacity};
+  margin-bottom: ${tokens.spacing[2]};
 `;
 
 const navigationSections = [

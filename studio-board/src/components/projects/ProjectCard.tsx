@@ -16,17 +16,24 @@ interface ProjectCardProps {
 
 const CardContainer = styled(Card)<{ variant: 'grid' | 'list' }>`
   cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.colors.border.light};
+  transition: ${({ theme }) => theme.transitions.all};
+  
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.border.medium};
+    box-shadow: ${({ theme }) => theme.shadows.lg};
+  }
   
   ${({ variant }) => variant === 'list' && css`
     display: flex;
     align-items: center;
-    padding: ${({ theme }) => theme.spacing.md};
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+    padding: ${({ theme }) => theme.spacing[4]};
+    margin-bottom: ${({ theme }) => theme.spacing[2]};
     
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
       flex-direction: column;
       align-items: stretch;
-      padding: ${({ theme }) => theme.spacing.sm};
+      padding: ${({ theme }) => theme.spacing[3]};
     }
   `}
   
@@ -55,21 +62,21 @@ const ProjectHeader = styled.div<{ variant: 'grid' | 'list' }>`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing[4]};
   
   ${({ variant }) => variant === 'list' && css`
     flex: 1;
     margin-bottom: 0;
-    margin-right: ${({ theme }) => theme.spacing.lg};
+    margin-right: ${({ theme }) => theme.spacing[6]};
     
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
       margin-right: 0;
-      margin-bottom: ${({ theme }) => theme.spacing.sm};
+      margin-bottom: ${({ theme }) => theme.spacing[2]};
     }
   `}
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
+    margin-bottom: ${({ theme }) => theme.spacing[2]};
   }
 `;
 
@@ -83,8 +90,8 @@ const ProjectTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.sizes.lg};
   font-weight: ${({ theme }) => theme.typography.weights.semibold};
   color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
-  line-height: 1.3;
+  margin: 0 0 ${({ theme }) => theme.spacing[1]} 0;
+  line-height: ${({ theme }) => theme.typography.lineHeights.tight};
   
   /* Truncate long titles */
   overflow: hidden;
@@ -95,8 +102,8 @@ const ProjectTitle = styled.h3`
 const ProjectDescription = styled.p<{ variant: 'grid' | 'list' }>`
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
-  line-height: 1.4;
+  margin: 0 0 ${({ theme }) => theme.spacing[4]} 0;
+  line-height: ${({ theme }) => theme.typography.lineHeights.normal};
   
   ${({ variant }) => variant === 'grid' && css`
     display: -webkit-box;

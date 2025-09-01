@@ -25,7 +25,7 @@ interface InputProps {
 
 const inputSizes = {
   sm: css`
-    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+    padding: ${({ theme }) => `${theme.spacing[1]} ${theme.spacing[2]}`};
     font-size: ${({ theme }) => theme.typography.sizes.sm};
     height: 32px;
     
@@ -35,25 +35,25 @@ const inputSizes = {
     }
   `,
   md: css`
-    padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+    padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[3]}`};
     font-size: ${({ theme }) => theme.typography.sizes.base};
     height: 40px;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
       height: ${({ theme }) => theme.touch.minTarget};
       font-size: 16px; /* Prevent zoom on iOS */
-      padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
+      padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[4]}`};
     }
   `,
   lg: css`
-    padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
+    padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[4]}`};
     font-size: ${({ theme }) => theme.typography.sizes.lg};
     height: 48px;
     
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
       height: 52px;
       font-size: 16px; /* Prevent zoom on iOS */
-      padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
+      padding: ${({ theme }) => `${theme.spacing[3]} ${theme.spacing[6]}`};
     }
   `,
 };
@@ -61,15 +61,15 @@ const inputSizes = {
 const inputVariants = {
   default: css`
     background-color: ${({ theme }) => theme.colors.background.elevated};
-    border: 1px solid ${({ theme }) => theme.colors.text.muted};
+    border: 1px solid ${({ theme }) => theme.colors.border.medium};
     
     &:hover:not(:disabled) {
-      border-color: ${({ theme }) => theme.colors.text.secondary};
+      border-color: ${({ theme }) => theme.colors.border.dark};
     }
     
     &:focus {
-      border-color: ${({ theme }) => theme.colors.accent.primary};
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accent.primary}20;
+      border-color: ${({ theme }) => theme.colors.border.focus};
+      box-shadow: ${({ theme }) => theme.shadows.focus};
     }
   `,
   filled: css`
@@ -78,13 +78,13 @@ const inputVariants = {
     
     &:hover:not(:disabled) {
       background-color: ${({ theme }) => theme.colors.background.elevated};
-      border-color: ${({ theme }) => theme.colors.text.muted};
+      border-color: ${({ theme }) => theme.colors.border.medium};
     }
     
     &:focus {
       background-color: ${({ theme }) => theme.colors.background.elevated};
-      border-color: ${({ theme }) => theme.colors.accent.primary};
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accent.primary}20;
+      border-color: ${({ theme }) => theme.colors.border.focus};
+      box-shadow: ${({ theme }) => theme.shadows.focus};
     }
   `,
 };
@@ -93,10 +93,11 @@ const StyledInput = styled(motion.input)<InputProps & { isFocused: boolean }>`
   font-family: ${({ theme }) => theme.typography.fonts.primary};
   font-weight: ${({ theme }) => theme.typography.weights.normal};
   color: ${({ theme }) => theme.colors.text.primary};
-  border-radius: ${({ theme }) => theme.borderRadius.md};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
   outline: none;
   width: 100%;
   position: relative;
+  transition: ${({ theme }) => theme.transitions.colors};
   
   ${({ size = 'md' }) => inputSizes[size]}
   ${({ variant = 'default' }) => inputVariants[variant]}
@@ -110,14 +111,15 @@ const StyledInput = styled(motion.input)<InputProps & { isFocused: boolean }>`
     
     &:focus {
       border-color: ${theme.colors.status.error};
-      box-shadow: 0 0 0 3px ${theme.colors.status.error}20;
+      box-shadow: 0 0 0 3px ${theme.colors.status.error}10;
     }
   `}
   
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
-    background-color: ${({ theme }) => theme.colors.background.secondary};
+    background-color: ${({ theme }) => theme.colors.surface[100]};
+    color: ${({ theme }) => theme.colors.text.muted};
   }
   
   &::placeholder {
@@ -128,7 +130,8 @@ const StyledInput = styled(motion.input)<InputProps & { isFocused: boolean }>`
 const ErrorMessage = styled(motion.div)`
   font-size: ${({ theme }) => theme.typography.sizes.xs};
   color: ${({ theme }) => theme.colors.status.error};
-  margin-top: ${({ theme }) => theme.spacing.xs};
+  margin-top: ${({ theme }) => theme.spacing[1]};
+  font-weight: ${({ theme }) => theme.typography.weights.medium};
 `;
 
 const InputWrapper = styled.div`

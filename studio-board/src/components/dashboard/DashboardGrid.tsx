@@ -37,7 +37,7 @@ const LeftPanel = styled.div`
 
 const RightPanel = styled.div`
   grid-column: 2;
-  grid-row: 1;
+  grid-row: span 2 / span 2;
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.lg};
@@ -50,7 +50,7 @@ const RightPanel = styled.div`
 `;
 
 const ActivitySection = styled.div`
-  grid-column: 1 / -1;
+  grid-column: 1 / 1;
   grid-row: 2;
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
