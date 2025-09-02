@@ -22,7 +22,7 @@ const SidebarContainer = styled.aside<{ $isExpanded: boolean; $isMobile: boolean
     if ($isMobile) return $isExpanded ? '100%' : '0';
     return $isExpanded ? '240px' : '64px';
   }};
-  background-color: ${tokens.colors.background.elevated};
+  background-color: #fcfcfc;
   border-right: 1px solid ${tokens.colors.border.light};
   transition: all ${tokens.transitions.normal};
   display: flex;

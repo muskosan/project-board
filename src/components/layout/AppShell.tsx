@@ -39,6 +39,7 @@ const MainContent = styled.main`
   min-height: calc(100vh - 64px);
   overflow-y: auto;
   padding: ${tokens.spacing.xl};
+  background-color: #fcfcfc;
   
   /* Smooth scrolling */
   scroll-behavior: smooth;

@@ -2,7 +2,7 @@ export const tokens = {
   colors: {
     // Practical UI inspired color palette
     background: {
-      primary: '#FFFFFF', // Pure white
+      primary: '#fcfcfc', // Very light gray background
       secondary: '#FAFBFC', // Subtle gray background
       elevated: '#FFFFFF', // White for elevated surfaces
       overlay: 'rgba(0, 0, 0, 0.05)', // Light overlay

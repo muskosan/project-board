@@ -5,7 +5,7 @@ import { tokens } from '../../styles/tokens';
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 400px;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: .5fr auto;
   gap: ${tokens.spacing.xl};
   height: calc(100vh - 120px); /* Account for header and padding */
   
@@ -27,7 +27,7 @@ const LeftPanel = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.lg};
-  min-height: 0; /* Allow flex children to shrink */
+  height: auto;
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
     grid-column: 1;
@@ -41,7 +41,7 @@ const RightPanel = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.lg};
-  min-height: 0; /* Allow flex children to shrink */
+  height: auto;
   
   @media (max-width: ${tokens.breakpoints.tablet}) {
     grid-column: 1;
