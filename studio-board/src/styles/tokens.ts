@@ -51,6 +51,21 @@ export const tokens = {
       secondaryHover: '#F1F5F9',
       secondaryActive: '#E2E8F0',
     },
+    // Soft blue palette for projects and accents
+    project: {
+      50: '#E3F2FD', // Very light blue
+      100: '#BBDEFB', // Light blue
+      200: '#90CAF9', // Medium light blue
+      300: '#64B5F6', // Medium blue
+      400: '#42A5F5', // Medium blue
+      500: '#2196F3', // Primary blue
+      600: '#1E88E5', // Medium dark blue
+      700: '#1976D2', // Dark blue
+      800: '#1565C0', // Darker blue
+      900: '#0D47A1', // Very dark blue
+      accent1: '#81C784', // Soft green (complementary)
+      accent2: '#AED581', // Light green (complementary)
+    },
   },
   typography: {
     fonts: {

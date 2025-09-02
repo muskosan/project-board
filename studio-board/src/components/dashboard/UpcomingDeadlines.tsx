@@ -129,13 +129,14 @@ const DeadlineMeta = styled.div`
   flex-wrap: wrap;
 `;
 
-const ProjectBadge = styled.span<{ color: string }>`
-  background-color: ${props => props.color};
+const ProjectBadge = styled.span`
+  background-color: ${tokens.colors.project[500]}; /* Mid blue from our soft blue palette */
   color: white;
   padding: 2px 8px;
   border-radius: ${tokens.borderRadius.sm};
   font-size: ${tokens.typography.sizes.xs};
   font-weight: 500;
+  border-radius: 10px;
 `;
 
 const UrgencyIndicator = styled.div<{ urgency: 'overdue' | 'urgent' | 'soon' | 'normal' }>`
@@ -266,7 +267,7 @@ export const UpcomingDeadlines: React.FC<UpcomingDeadlinesProps> = ({
               
               <DeadlineContent>
               {deadline.project && (
-                    <ProjectBadge color={deadline.project.color}>
+                    <ProjectBadge>
                       {deadline.project.name}
                     </ProjectBadge>
                   )}

@@ -36,6 +36,14 @@ const randomChoice = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+// Color assignment counter for consistent project colors
+let colorIndex = 0;
+const getNextColor = (): string => {
+  const color = softBlueColors[colorIndex % softBlueColors.length];
+  colorIndex++;
+  return color;
+};
+
 const randomChoices = <T>(array: T[], count: number = 3): T[] => {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, Math.min(count, array.length));
@@ -78,9 +86,20 @@ const taskTitles = [
   'User testing', 'Content migration', 'SEO optimization'
 ];
 
-const colors = [
-  '#D2691E', '#5F9EA0', '#CD853F', '#4682B4', '#9370DB', '#20B2AA',
-  '#FF6347', '#32CD32', '#FFD700', '#FF69B4', '#87CEEB', '#DDA0DD'
+// Soft blue palette for consistent project colors
+const softBlueColors = [
+  '#E3F2FD', // Very light blue
+  '#BBDEFB', // Light blue
+  '#90CAF9', // Medium light blue
+  '#64B5F6', // Medium blue
+  '#42A5F5', // Medium blue
+  '#2196F3', // Primary blue
+  '#1E88E5', // Medium dark blue
+  '#1976D2', // Dark blue
+  '#1565C0', // Darker blue
+  '#0D47A1', // Very dark blue
+  '#81C784', // Soft green (complementary)
+  '#AED581', // Light green (complementary)
 ];
 
 const tags = [
@@ -162,7 +181,7 @@ export const generateMockProject = (overrides: Partial<Project> = {}): Project =
     client: undefined, // Will be populated separately
     team: [], // Will be populated separately
     tags: randomChoices(tags, randomNumber(1, 4)),
-    color: randomChoice(colors),
+    color: getNextColor(), // Use systematic color assignment
     settings: {
       isPublic: randomBoolean(),
       allowClientAccess: randomBoolean(),
@@ -257,7 +276,7 @@ export const generateMockCalendarEvent = (overrides: Partial<CalendarEvent> = {}
     start,
     end,
     type: randomChoice(['deadline', 'meeting', 'milestone'] as CalendarEventType[]),
-    color: randomChoice(colors),
+    color: getNextColor(), // Use systematic color assignment
     attendees: [],
     createdBy: randomId(),
     createdAt: randomDate(),
@@ -314,7 +333,7 @@ export const generateMockColumn = (title: string, taskCount: number = 5): Column
     id: randomId(),
     title,
     tasks: Array.from({ length: taskCount }, () => generateMockTask(randomId())),
-    color: randomChoice(colors),
+    color: getNextColor(), // Use systematic color assignment
     limit: randomNumber(5, 15),
     order: 0,
   };
@@ -599,6 +618,9 @@ export interface MockDataset {
 }
 
 export const generateCompleteDataset = (): MockDataset => {
+  // Reset color index for consistent colors
+  colorIndex = 0;
+  
   // Generate users first
   const users = generateMockUsers(15);
   const clients = Array.from({ length: 5 }, () => generateMockClient());
