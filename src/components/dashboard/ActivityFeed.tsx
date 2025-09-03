@@ -79,12 +79,35 @@ const ActivityItemContainer = styled(motion.div)`
   }
 `;
 
-const Avatar = styled.img`
+const AvatarContainer = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 50%;
   flex-shrink: 0;
   background-color: ${tokens.colors.background.secondary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+const Avatar = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
+const AvatarFallback = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${tokens.colors.accent.primary};
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${tokens.typography.sizes.xs};
+  font-weight: ${tokens.typography.weights.semibold};
 `;
 
 const ActivityContent = styled.div`
@@ -149,6 +172,43 @@ interface ActivityFeedProps {
   isLoading?: boolean;
   hasMore?: boolean;
 }
+
+interface UserAvatarProps {
+  user?: {
+    firstName?: string;
+    lastName?: string;
+    avatar?: string;
+  };
+}
+
+const UserAvatar: React.FC<UserAvatarProps> = ({ user }) => {
+  const [imageError, setImageError] = React.useState(false);
+  
+  const getInitials = () => {
+    if (!user?.firstName && !user?.lastName) return '?';
+    return `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase();
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  return (
+    <AvatarContainer>
+      {user?.avatar && !imageError ? (
+        <Avatar
+          src={user.avatar}
+          alt={`${user.firstName} ${user.lastName}`}
+          onError={handleImageError}
+        />
+      ) : (
+        <AvatarFallback>
+          {getInitials()}
+        </AvatarFallback>
+      )}
+    </AvatarContainer>
+  );
+};
 
 const formatTimestamp = (date: Date): string => {
   const now = new Date();
@@ -221,10 +281,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
               transition: { duration: 0.15 },
             }}
           >
-            <Avatar
-              src={item.user?.avatar}
-              alt={`${item.user?.firstName} ${item.user?.lastName}`}
-            />
+            <UserAvatar user={item.user} />
             <ActivityContent>
               <ActivityText variant="body">
                 <strong>{item.user?.firstName} {item.user?.lastName}</strong>{' '}

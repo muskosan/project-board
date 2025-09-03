@@ -657,7 +657,9 @@ export const generateCompleteDataset = (): MockDataset => {
   // Generate activity items
   const activityItems = Array.from({ length: 50 }, () => {
     const activity = generateMockActivityItem();
-    activity.userId = randomChoice(users).id;
+    const user = randomChoice(users);
+    activity.userId = user.id;
+    activity.user = user; // Populate the user object
     
     // Link to projects and tasks
     if (randomBoolean() && projects.length > 0) {
